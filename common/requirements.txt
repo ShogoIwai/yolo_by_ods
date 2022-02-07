@@ -1,10 +1,11 @@
+bs4
 docopt
 flask
 ImageHash
 jinja2
 more-itertools
 Pillow
-pymongo
+pymongo==3.6.0
 python-magic
 termcolor
 Werkzeug
