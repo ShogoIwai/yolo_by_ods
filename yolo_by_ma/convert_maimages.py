@@ -12,6 +12,8 @@ sys.path.append(os.path.abspath('../common'))
 from cdd import convert_darknettxt_dataset
 from df  import df
 
+from difPy import dif
+
 global opts
 opts = {}
 imgsubdir = 'images'
@@ -56,6 +58,7 @@ if __name__ == '__main__':
                     url = requests.get(urlName)
                     soup = BeautifulSoup(url.content, 'html.parser')
 
+                    # for latest
                     if (site_idx == 0):
                         uls = soup.find_all('ul', class_='gallery-a e')
                         if (not len(uls)): raise Exception
@@ -68,6 +71,7 @@ if __name__ == '__main__':
                                 name = tas[1].text
                                 # print(name)
                                 names.append(name)
+                    # top-rated
                     if (site_idx == 1):
                         uls = soup.find_all('ul', class_='gallery-a a d')
                         if (not len(uls)): raise Exception
@@ -124,7 +128,8 @@ if __name__ == '__main__':
         convert_darknettxt_dataset.drop_empty_folders(imgsubdir)
         convert_darknettxt_dataset.drop_empty_folders(imgsubdir)
 
-        df.img(imgsubdir)
-        df.prt()
-        df.mvp()
-        df.clr()
+        dif(imgsubdir, delete=True)
+        # df.img(imgsubdir)
+        # df.prt()
+        # df.mvp()
+        # df.clr()
