@@ -1,0 +1,12 @@
+docopt
+flask
+ImageHash
+jinja2
+more-itertools
+Pillow
+pymongo
+python-magic
+termcolor
+Werkzeug
+Flask-Cors
+dnspython

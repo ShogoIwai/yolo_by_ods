@@ -49,3 +49,6 @@ if __name__ == '__main__':
                 dst_file = '%s/%s%08d.jpg' % (dst_dir, cat, num)
                 print('mv %s to %s' % (image, dst_file))
                 shutil.move(image, dst_file)
+
+        if os.path.isdir(org_dir):
+            shutil.rmtree(org_dir)

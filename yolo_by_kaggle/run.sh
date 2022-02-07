@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 python ./convert_kaggleimages.py --dwn
 python ./convert_kaggleimages.py --zip kagglecatsanddogs_3367a.zip
-rm -rf PetImages
 python ../common/cdd/convert_darknettxt_dataset.py ./ ./custom_classes.txt
 
 git clone https://github.com/nekobean/pytorch_yolov3
