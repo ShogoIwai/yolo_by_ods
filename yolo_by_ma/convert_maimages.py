@@ -10,9 +10,8 @@ import glob
 
 sys.path.append(os.path.abspath('../common'))
 from cdd import convert_darknettxt_dataset
-from df  import df
-
 from difPy import dif
+from df  import df
 
 global opts
 opts = {}
@@ -96,7 +95,7 @@ if __name__ == '__main__':
         dst_dir = f'./{imgsubdir}'
         if not os.path.isdir(dst_dir):
             os.makedirs(dst_dir)
-        downcsh = f'{dst_dir}/down.sh'
+        downcsh = f'{dst_dir}/down%s.sh' % site_idx
         ofs = open(downcsh, mode='w')
         ofs.write(f"#!/usr/bin/env bash\n")
         for name in names:
