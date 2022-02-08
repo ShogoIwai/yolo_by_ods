@@ -73,3 +73,4 @@ if __name__ == '__main__':
     parseOptions()
     if ('img' in opts.keys()):
         rm_min_img(opts['img'])
+        drop_empty_folders(opts['img'])

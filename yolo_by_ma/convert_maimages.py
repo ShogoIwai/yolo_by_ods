@@ -128,7 +128,7 @@ if __name__ == '__main__':
         rmminimg.drop_empty_folders(imgsubdir)
         rmminimg.drop_empty_folders(imgsubdir)
 
-        dif(imgsubdir, delete=True)
+        # dif(imgsubdir, delete=True)
         df.img(imgsubdir)
         df.prt()
         df.mvp()
