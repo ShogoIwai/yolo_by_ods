@@ -31,11 +31,6 @@ def parse_args():
 
     return args
 
-def drop_empty_folders(directory):
-    for dirpath, dirnames, filenames in os.walk(directory, topdown=False):
-        if not dirnames and not filenames:
-            os.rmdir(dirpath)
-
 def csvread(file_name):
     with open(file_name, 'r') as csvfile:
         list_ary = []

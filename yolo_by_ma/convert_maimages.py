@@ -10,6 +10,7 @@ import glob
 
 sys.path.append(os.path.abspath('../common'))
 from cdd import convert_darknettxt_dataset
+from rmminimg import rmminimg
 from difPy import dif
 from df  import df
 
@@ -103,6 +104,8 @@ if __name__ == '__main__':
         ofs.close()
 
     if ('conv' in opts.keys()):
+        rmminimg.rm_min_img(imgsubdir)
+
         img_files = list(glob.glob(f'{imgsubdir}/*/*/*.jpg'))
         img_files.sort()
         # print(img_files)
@@ -122,11 +125,11 @@ if __name__ == '__main__':
             print('%s -> %s' % (sample['src'], sample['dst']))
             shutil.move(sample['src'], sample['dst'])
 
-        convert_darknettxt_dataset.drop_empty_folders(imgsubdir)
-        convert_darknettxt_dataset.drop_empty_folders(imgsubdir)
+        rmminimg.drop_empty_folders(imgsubdir)
+        rmminimg.drop_empty_folders(imgsubdir)
 
         dif(imgsubdir, delete=True)
-        # df.img(imgsubdir)
-        # df.prt()
-        # df.mvp()
-        # df.clr()
+        df.img(imgsubdir)
+        df.prt()
+        df.mvp()
+        df.clr()

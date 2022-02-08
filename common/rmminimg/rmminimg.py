@@ -64,6 +64,11 @@ def rm_min_img(imgdir, min_width=500, min_height=500):
                 print(f"{tgt} is empty, so removed.")
                 os.rmdir(tgt)
 
+def drop_empty_folders(directory):
+    for dirpath, dirnames, filenames in os.walk(directory, topdown=False):
+        if not dirnames and not filenames:
+            os.rmdir(dirpath)
+
 if __name__ == '__main__':
     parseOptions()
     if ('img' in opts.keys()):
