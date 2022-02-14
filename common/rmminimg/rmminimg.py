@@ -40,7 +40,7 @@ def is_empty(directory):
     else:
         return False
 
-def rm_min_img(imgdir, min_width=500, min_height=500):
+def rm_min_img(imgdir, min_width=526, min_height=791):
     # img_files = glob.glob(f"{imgdir}/**", recursive=True)
     img_files = list(glob.glob(f'{imgdir}/*/*/*.jpg'))
     img_files.sort()
@@ -91,6 +91,9 @@ def cp_img(imgdir):
         shutil.move(sample['src'], sample['dst'])
 
 def drop_empty_folders(directory):
+    img_files = glob.glob(f"{directory}/*/*/*")
+    for tgt in img_files:
+        os.remove(tgt)
     for dirpath, dirnames, filenames in os.walk(directory, topdown=False):
         if not dirnames and not filenames:
             os.rmdir(dirpath)
