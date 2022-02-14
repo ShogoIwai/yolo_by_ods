@@ -12,9 +12,10 @@ from rmminimg import rmminimg
 from difPy import dif
 from df  import df
 
+import inference
+
 global opts
 opts = {}
-imgsubdir = 'images'
 
 def parseOptions():
     argparser = ArgumentParser()
@@ -38,6 +39,8 @@ if __name__ == '__main__':
     start_num = int(opts['snm'])
     page_size = int(opts['psz'])
     lim = int(opts['lim'])
+
+    imgsubdir = 'images'
 
     if ('dwn' in opts.keys()):
         if os.path.isfile('site.txt'):
@@ -104,6 +107,7 @@ if __name__ == '__main__':
 
     if ('conv' in opts.keys()):
         rmminimg.rm_min_img(imgsubdir)
+        inference.main(imgsubdir)
         rmminimg.cp_img(imgsubdir)
         rmminimg.drop_empty_folders(imgsubdir)
         rmminimg.drop_empty_folders(imgsubdir)
