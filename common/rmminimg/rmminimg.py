@@ -3,6 +3,8 @@ import os
 import sys
 
 import glob
+import re
+import shutil
 import cv2
 import tensorflow as tf
 
@@ -39,9 +41,12 @@ def is_empty(directory):
         return False
 
 def rm_min_img(imgdir, min_width=500, min_height=500):
-    targets = glob.glob(f"{imgdir}/**", recursive=True)
+    # img_files = glob.glob(f"{imgdir}/**", recursive=True)
+    img_files = list(glob.glob(f'{imgdir}/*/*/*.jpg'))
+    img_files.sort()
+    # print(img_files)
 
-    for tgt in targets:
+    for tgt in img_files:
         if (os.path.isfile(tgt)):
             try:
                 fobj = open(tgt, "rb")
@@ -63,6 +68,27 @@ def rm_min_img(imgdir, min_width=500, min_height=500):
             if (is_empty(tgt)):
                 print(f"{tgt} is empty, so removed.")
                 os.rmdir(tgt)
+
+def cp_img(imgdir):
+    img_files = list(glob.glob(f'{imgdir}/*/*/*.jpg'))
+    img_files.sort()
+    # print(img_files)
+
+    samples = []
+    dupchk = {}
+    for src in img_files:
+        m = re.findall(f'{imgsubdir}\/(.*)\/(.*)\/.*.jpg$', src)
+        if m[0]:
+            idx = 0
+            dst = f'{imgsubdir}/%s_%s_%08d.jpg' % (m[0][0], m[0][1], idx)
+            while os.path.isfile(dst) or dst in dupchk.keys():
+                idx = idx + 1
+                dst = f'{imgsubdir}/%s_%s_%08d.jpg' % (m[0][0], m[0][1], idx)
+            samples.append({"src": src, "dst": dst})
+            dupchk[dst] = True
+    for sample in samples:
+        print('%s -> %s' % (sample['src'], sample['dst']))
+        shutil.move(sample['src'], sample['dst'])
 
 def drop_empty_folders(directory):
     for dirpath, dirnames, filenames in os.walk(directory, topdown=False):

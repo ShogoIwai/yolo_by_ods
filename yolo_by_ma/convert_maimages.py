@@ -2,8 +2,6 @@ from argparse import ArgumentParser
 import os
 import sys
 
-import shutil
-import re
 import requests
 from bs4 import BeautifulSoup
 import glob
@@ -106,26 +104,7 @@ if __name__ == '__main__':
 
     if ('conv' in opts.keys()):
         rmminimg.rm_min_img(imgsubdir)
-
-        img_files = list(glob.glob(f'{imgsubdir}/*/*/*.jpg'))
-        img_files.sort()
-        # print(img_files)
-        samples = []
-        dupchk = {}
-        for src in img_files:
-            m = re.findall(f'{imgsubdir}\/(.*)\/(.*)\/.*.jpg$', src)
-            if m[0]:
-                idx = 0
-                dst = f'{imgsubdir}/%s_%s_%08d.jpg' % (m[0][0], m[0][1], idx)
-                while os.path.isfile(dst) or dst in dupchk.keys():
-                    idx = idx + 1
-                    dst = f'{imgsubdir}/%s_%s_%08d.jpg' % (m[0][0], m[0][1], idx)
-                samples.append({"src": src, "dst": dst})
-                dupchk[dst] = True
-        for sample in samples:
-            print('%s -> %s' % (sample['src'], sample['dst']))
-            shutil.move(sample['src'], sample['dst'])
-
+        rmminimg.cp_img(imgsubdir)
         rmminimg.drop_empty_folders(imgsubdir)
         rmminimg.drop_empty_folders(imgsubdir)
 
