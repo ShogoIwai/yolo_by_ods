@@ -90,6 +90,7 @@ if __name__ == '__main__':
         exe = 'python ~/rep/yolo_by_ods/common/gid/gid.py'
         KeywordAry = convert_darknettxt_dataset.csvread('kwd.txt')
         names = list(dict.fromkeys(names))
+        names.sort()
 
         dst_dir = f'./{imgsubdir}'
         if not os.path.isdir(dst_dir):
