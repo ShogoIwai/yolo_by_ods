@@ -77,13 +77,13 @@ def cp_img(imgdir):
     samples = []
     dupchk = {}
     for src in img_files:
-        m = re.findall(f'{imgsubdir}\/(.*)\/(.*)\/.*.jpg$', src)
+        m = re.findall(f'{imgdir}\/(.*)\/(.*)\/.*.jpg$', src)
         if m[0]:
             idx = 0
-            dst = f'{imgsubdir}/%s_%s_%08d.jpg' % (m[0][0], m[0][1], idx)
+            dst = f'{imgdir}/%s_%s_%08d.jpg' % (m[0][0], m[0][1], idx)
             while os.path.isfile(dst) or dst in dupchk.keys():
                 idx = idx + 1
-                dst = f'{imgsubdir}/%s_%s_%08d.jpg' % (m[0][0], m[0][1], idx)
+                dst = f'{imgdir}/%s_%s_%08d.jpg' % (m[0][0], m[0][1], idx)
             samples.append({"src": src, "dst": dst})
             dupchk[dst] = True
     for sample in samples:
