@@ -99,10 +99,12 @@ if __name__ == '__main__':
         downcsh = f'{dst_dir}/down.sh'
         ofs = open(downcsh, mode='w')
         ofs.write(f"#!/usr/bin/env bash\n")
+        knd = f"%s %s %s" % (KeywordAry[1][0], KeywordAry[1][1], KeywordAry[1][2])
+        ofs.write(f"kind='{knd}'\n")
+        ofs.write(f"limit='{lim}'\n")
         for name in names:
             tgt = f"%s {name}" % (KeywordAry[0][0])
-            knd = f"%s %s %s" % (KeywordAry[1][0], KeywordAry[1][1], KeywordAry[1][2])
-            ofs.write(f"{exe} --tgt '{tgt}' --knd '{knd}' --lim {lim}\n")
+            ofs.write(f"{exe} --tgt '{tgt}' --knd \"${{kind}}\" --lim \"${{limit}}\"\n")
         ofs.close()
 
     if ('conv' in opts.keys()):
