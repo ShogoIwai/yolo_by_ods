@@ -45,11 +45,11 @@ def main(imgdir):
                     check[1] = True
             if (check[0] == True and check[1] == True):
                 print (f"label0 and label1 are available in {img_path}")
-                if not os.path.isdir(args_output):
-                    os.makedirs(args_output)
-                img = detect_image.Image.open(img_path)
-                detector.draw_boxes(img, detection)
-                img.save(args_output + "/" + detect_image.Path(img_path).name)
+                # if not os.path.isdir(args_output):
+                #     os.makedirs(args_output)
+                # img = detect_image.Image.open(img_path)
+                # detector.draw_boxes(img, detection)
+                # img.save(args_output + "/" + detect_image.Path(img_path).name)
             else:
                 print (f"label0 or label1 is not available in {img_path}")
                 os.remove(img_path)

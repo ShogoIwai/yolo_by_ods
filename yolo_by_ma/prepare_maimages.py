@@ -49,8 +49,8 @@ if __name__ == '__main__':
             urlSiteAry = convert_darknettxt_dataset.csvread('site.txt')
             for site_idx in range(2):
                 urlSite = urlSiteAry[site_idx][0]
-                try:
-                    for i in range(page_size):
+                for i in range(page_size):
+                    try:
                         idx = str(start_num + i)
                         urlName = f"{urlSite}/{idx}/"
                         print(f"loading : {urlName} ...")
@@ -83,8 +83,8 @@ if __name__ == '__main__':
                                     name = spans[0].text
                                     # print(name)
                                     names.append(name)
-                except Exception:
-                    pass
+                    except Exception:
+                        pass
         else:
             names = ['cat', 'dog']
 
