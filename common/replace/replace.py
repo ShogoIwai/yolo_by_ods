@@ -25,6 +25,7 @@ def replace():
             line = re.sub(opts['pre'], opts['post'], line)
             ofs.write(line)
     ofs.close()
+    shutil.copymode(infile, outfile)
     shutil.move(outfile, infile)
 
 if __name__ == '__main__':
